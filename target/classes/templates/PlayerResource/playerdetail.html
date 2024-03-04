@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiztime - Willkommen</title>
+
+    <!-- Local Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Bootstrap framework    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<header>
+    <div class="navbar-background">
+        <div class="container">
+            <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+                <a class="navbar-brand" href="../welcome"><img src="/img/logo.png" height="80px"
+                                                               alt="Logo Quiztime"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse " id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../welcome">Willkommen</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../quiz">Quiz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../highscore">Highscore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../players">Playerübersicht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../quizzes">Quizübersicht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../profil">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login">Anmelden</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="site-description">
+            <h1>Playerdetails</h1>
+            <a href="../players">zurück</a>
+            <br><br>
+            <h1>{player.username} | {player.id}</h1>
+            <hr>
+
+            <form method="POST" action="{player.id}/update">
+                <label for="email">Email:</label>
+                <input class="form-control" required type="email" value="{player.email}" name="mail" id="mail">
+                <label for="username">Benutzername:</label>
+                <input class="form-control" type="text" value="{player.username}" name="username" id="username"
+                       disabled="disabled">
+                <label for="password">Passwort:</label>
+                <input class="form-control" required type="password" value="{player.password}" name="password"
+                       id="password">
+                <label for="score">Score:</label>
+                <p class="form-control">{player.score}</p>
+                <label for="points">Rolle:</label>
+                <select name="role" id="role">
+                    <option value="{player.role}">{player.role}</option>
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                </select><br><br>
+                <input class="btn btn-warning" type="submit" value="update" id="update">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    <div class="container">
+        <p>Annette Michel 848262 | <a href="/img/SWA_Projektdokumentation_Annette_Michel.pdf" target="_blank">Projektdokumentation</a>
+        </p>
+    </div>
+</footer>
+<script>
+    //Quelle: https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
+    //Quelle: https://developer.mozilla.org/en-US/docs/Web/API/Location
+    if (window.location.href.indexOf("update") > -1) window.history.pushState(undefined, undefined, window.location.origin + "/player/{player.id}");
+</script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiztime - Highscore</title>
+
+    <!-- Local Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Bootstrap framework    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<header>
+    <div class="navbar-background">
+        <div class="container">
+            <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+                <a class="navbar-brand" href="../welcome"><img src="/img/logo.png" height="80px" alt="Quiztime"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse " id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../welcome">Willkommen</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../quiz">Quiz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../highscore">Highscore</a>
+                        </li>
+                        {#if player.role.equals("admin")}
+                            <li class="nav-item">
+                                <a class="nav-link" href="../players">Playerübersicht</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../quizzes">Quizübersicht</a>
+                            </li>
+                        {/if}
+                        <li class="nav-item">
+                            <a class="nav-link" href="../profil">Profil</a>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login">Anmelden</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="site-description text-center">
+            <h1>Highscore Übersicht</h1><br>
+            <p>Wenn du den aktuellen Rekordhalter schlagen willst, musst du fleißig die Fragen richtig beantworten. Aber
+                keine Sorge, wir glauben an dich! Wir sind sicher, dass du bald zu den besten Spielerinnen und Spielern
+                gehören wirst. Vielleicht schaffst du es sogar an die Spitze der Highscore-Liste!</p>
+        </div>
+        <div class="offset-3 col-sm-6 table-view table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Benutzername</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody id="table">
+                {#for current_player in players}
+
+                    {#if current_player.role == 'user' && current_player.score > 1}
+                        <tr>
+                        <td>{current_player.username}</td>
+                        <td>{current_player.score}</td>
+                        </tr>
+                    {/if}
+                {/for}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    <div class="container">
+        <p>Annette Michel 848262 | <a href="/img/SWA_Projektdokumentation_Annette_Michel.pdf" target="_blank">Projektdokumentation</a>
+        </p>
+    </div>
+</footer>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>

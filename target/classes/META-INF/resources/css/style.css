@@ -1,0 +1,107 @@
+/*----- Basics ------*/
+select {
+    padding: 8px;
+}
+input.btn.btn-primary {
+    margin: 15px 0;
+}
+.btn-primary {
+    background-color: #47A7DD !important;
+    border-color: #47A7DD !important;
+}
+.btn-warning {
+    color:#fff!important;
+}
+a{
+    color: #47A7DD!important;
+    text-decoration: none!important;
+}
+a:hover{
+    opacity: 0.8;
+}
+h3 {
+    font-size: 20px !important;
+}
+
+/*------ Navigation -----*/
+.navbar-background{
+    background-color: #212529!important;
+    padding: 10px 0;
+    margin-bottom: 80px;
+}
+.navbar-brand img{
+    width: 125px;
+    height: auto;
+}
+nav a{
+    color: #9B9D9F!important;
+    text-decoration: none!important;
+}
+/*------ body -----*/
+.search-bar input[type="text"] {
+    padding: 5px;
+}
+.search-bar-item{
+    display: inline-block;
+    margin-right: 30px;
+}
+.site-description{
+    margin-bottom: 60px;
+}
+.form-input {
+    border: 1px solid #9B9D9F;
+    padding: 50px !important;
+    margin-bottom: 40px;
+    height: auto;
+}
+.form-input p{
+    font-size: 14px;
+}
+td,th {
+    padding: 15px 15px!important;
+}
+.table{
+    border: 1px solid #9b9d9f26!important;
+}
+.has-border{
+    padding: 15px;
+    border: 1px solid #9B9D9F;
+    min-height: 250px;
+}
+
+.add-card {
+    border: 1px solid #cdcdcd;
+    padding: 30px;
+}
+
+label {
+    font-weight: bold;
+    padding: 15px 0 0 0;
+}
+
+
+input.form-control {
+    margin: 10px 0;
+}
+.has-border {
+    margin: 0 20px;
+    min-height: 315px;
+}
+/*------ footer -----*/
+
+footer{
+    background-color: #212529;
+    padding: 10px 0;
+    color: #9B9D9F;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 80px;
+}
+
+@media only screen and (min-width:768px) {
+    div#navbar {
+        justify-content: flex-end;
+    }
+}

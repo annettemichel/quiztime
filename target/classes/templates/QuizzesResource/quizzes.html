@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiztime - Quizauflistung</title>
+
+    <!-- Local Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Bootstrap framework    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<header>
+    <div class="navbar-background">
+        <div class="container">
+            <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+                <a class="navbar-brand" href="../welcome"><img src="/img/logo.png" height="80px" alt="Quiztime"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse " id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../welcome">Willkommen</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../quiz">Quiz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../highscore">Highscore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../players">Playerübersicht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../quizzes">Quizübersicht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../profil">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login">Anmelden</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="site-description">
+            <h1>Auflistung aller Quizzes</h1>
+        </div>
+        <div class="search-bar">
+            <form class="search-bar-item" action="/quizzes/searchid" method="POST">
+                <label>Suche:</label>
+                <input type="text" placeholder="Id..." name="id" required>
+                <input class="btn btn-primary" type="submit" value="suchen" id="searchid">
+            </form>
+            <form class="search-bar-item" action="/quizzes/searchtopic" method="POST">
+                <label for="topic">Filter:</label>
+                <select name="topic" id="topic">
+                    <option value="ANIMALS">ANIMALS</option>
+                    <option value="MUSIC">MUSIC</option>
+                    <option value="MOVIES">MOVIES</option>
+                    <option value="HISTORY">HISTORIE</option>
+                </select>
+                <input class="btn btn-primary" type="submit" value="suchen" id="searchtopic">
+            </form>
+        </div>
+        <div class="col-12 col-sm-8 table-view table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Bereich</th>
+                    <th>Frage</th>
+                    <th>Antwort</th>
+                    <th>Punkte</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody id="table">
+                {#for quiz in quizzes}
+                    <tr>
+                    <th>{quiz.id}</th>
+                    <td>{quiz.topic}</td>
+                    <td>{quiz.question}</td>
+                    <td>{quiz.answer}</td>
+                    <td>{quiz.points}</td>
+                    <td><a href="/quizzes/{quiz.id}" class="btn btn-warning" role="button">
+                            Update</a></td>
+                    <td><form method="POST" action="/quizzes/delete/{quiz.id}">
+                        <input class="btn btn-danger" type="submit" value="Löschen" id="delete">
+                    </form>
+                    </td>
+                    </tr>
+                {/for}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-sm-3">
+            <div class="add-card">
+                <h3>Quiz hinzufügen</h3><br>
+                <form method="POST">
+                    <label for="topic">Thema:</label>
+                    <select name="topic" id="topic">
+                        <option value="ANIMALS">TIERE</option>
+                        <option value="MUSIC">MUSIK</option>
+                        <option value="MOVIES">FILME</option>
+                        <option value="HISTORY">HISTORIE</option>
+                    </select><br>
+                    <input class="form-control" required type="text" placeholder="Frage" name="question" id="question">
+                    <input class="form-control" required type="text" placeholder="Antwort" name="answer" id="answer">
+                    <label for="points">Punkte:</label>
+                    <select name="points" id="points">
+                        <option value="2">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                    </select><br><br>
+                    <input class="btn btn-primary" type="submit" value="Hinzufügen">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    <div class="container">
+        <p>Annette Michel 848262 | <a href="/img/SWA_Projektdokumentation_Annette_Michel.pdf" target="_blank">Projektdokumentation</a>
+        </p>
+    </div>
+</footer>
+<script>
+    //Quelle: https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
+    //Quelle: https://developer.mozilla.org/en-US/docs/Web/API/Location
+    if (window.location.href.indexOf("delete") > -1) window.history.pushState(undefined, undefined, window.location.origin + "/quizzes");
+    if (window.location.href.indexOf("search") > -1) window.history.pushState(undefined, undefined, window.location.origin + "/quizzes");
+</script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>
